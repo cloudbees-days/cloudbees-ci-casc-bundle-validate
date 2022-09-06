@@ -11,7 +11,7 @@ pipeline {
           rm bundle.zip || true
           git clone https://github.com/cbci-previews-demo/controller.git controller
           cd controller/bundle
-          zip -r -j bundle.zip ./*
+          zip -r bundle.zip ./*
         '''
         withCredentials([usernamePassword(credentialsId: 'admin-cli-token', usernameVariable: 'JENKINS_CLI_USR', passwordVariable: 'JENKINS_CLI_PSW')]) {
           sh  '''
