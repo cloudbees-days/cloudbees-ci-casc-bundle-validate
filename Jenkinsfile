@@ -8,10 +8,16 @@ pipeline {
     stage('Validate Bundle') {
       steps {
         sh '''
-          rm bundle.zip || true
+          
+          mkdir -p cbci-previews-demo-controller
           git clone https://github.com/cbci-previews-demo/controller.git controller
-          cd controller/bundle
-          zip -r bundle.zip ./*
+        '''
+        dir('contorller/bundle') {
+          sh "cp --parents `find -name \\*.yaml*` ../../cbci-previews-demo-controller/"
+        }
+        sh '''
+          ls -la cbci-previews-demo-controller
+          zip -r bundle.zip cbci-previews-demo-controller
         '''
         withCredentials([usernamePassword(credentialsId: 'admin-cli-token', usernameVariable: 'JENKINS_CLI_USR', passwordVariable: 'JENKINS_CLI_PSW')]) {
           sh  '''
