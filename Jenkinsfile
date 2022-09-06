@@ -8,7 +8,7 @@ pipeline {
     stage('Validate Bundle') {
       steps {
         sh '''
-          git clone -b test-2 https://github.com/cloudbees-days/cloudbees-ci-config-bundle.git controller
+          git clone -b test https://github.com/cloudbees-days/ops-controller.git controller
           cd ./controller/bundle/
           zip -r bundle.zip ./*
         '''
