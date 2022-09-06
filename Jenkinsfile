@@ -17,7 +17,7 @@ pipeline {
             curl --user "$JENKINS_CLI_USR:$JENKINS_CLI_PSW" -XPOST \
               -H "Accept: application/json"  \
               -H "Content-type: application/zip" --data-binary "@./controller/base/bundle.zip" \
-              http://cjoc/cjoc/casc-bundle-mgnt/casc-bundle-validate
+              http://cbci-previews-demo-controller.controllers.svc.cluster.local/cbci-previews-demo-controller/casc-bundle-mgnt/casc-bundle-validate
           '''
         }
       }              
