@@ -8,7 +8,7 @@ pipeline {
     stage('Validate Bundle') {
       steps {
         sh '''
-          git https://github.com/cbci-previews-demo/controller.git controller
+          git clone https://github.com/cbci-previews-demo/controller.git controller
           cd ./controller/bundle/
           zip -r bundle.zip ./*
         '''
