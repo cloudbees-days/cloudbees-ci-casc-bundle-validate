@@ -10,14 +10,14 @@ pipeline {
         sh '''
           rm bundle.zip || true
           git clone https://github.com/cbci-previews-demo/controller.git controller
-          cd controller
-          zip -r -j bundle.zip bundle/*
+          cd controller/bundle
+          zip -r -j bundle.zip ./*
         '''
         withCredentials([usernamePassword(credentialsId: 'admin-cli-token', usernameVariable: 'JENKINS_CLI_USR', passwordVariable: 'JENKINS_CLI_PSW')]) {
           sh  '''
             curl --user "$JENKINS_CLI_USR:$JENKINS_CLI_PSW" -XPOST \
               -H "Accept: application/json"  \
-              --header "Content-type: application/zip" --data-binary "@./controller/bundle.zip" \
+              --header "Content-type: application/zip" --data-binary "@./controller/bundle/bundle.zip" \
               http://cjoc/cjoc/casc-bundle-mgnt/casc-bundle-validate
           '''
         }
