@@ -9,7 +9,8 @@ pipeline {
       steps {
         sh '''
           rm bundle.zip || true
-          git clone https://github.com/cbci-previews-demo/controller.git checkout
+          git clone https://github.com/cbci-previews-demo/controller.git .
+          cd controller
           zip -r bundle.zip bundle
         '''
         withCredentials([usernamePassword(credentialsId: 'admin-cli-token', usernameVariable: 'JENKINS_CLI_USR', passwordVariable: 'JENKINS_CLI_PSW')]) {
