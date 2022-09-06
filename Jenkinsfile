@@ -9,7 +9,7 @@ pipeline {
       steps {
         sh '''
           rm bundle.zip || true
-          git clone https://github.com/cbci-previews-demo/controller.git .
+          git clone https://github.com/cbci-previews-demo/controller.git controller
           cd controller
           zip -r bundle.zip bundle
         '''
