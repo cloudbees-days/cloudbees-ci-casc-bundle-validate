@@ -14,6 +14,7 @@ pipeline {
         '''
         withCredentials([usernamePassword(credentialsId: 'admin-cli-token', usernameVariable: 'JENKINS_CLI_USR', passwordVariable: 'JENKINS_CLI_PSW')]) {
           sh  '''
+            pwd
             curl --user "$JENKINS_CLI_USR:$JENKINS_CLI_PSW" -XPOST \
               -H "Accept: application/json"  \
               -H "Content-type: application/zip" --data-binary "@./controller/bundle/bundle.zip" \
