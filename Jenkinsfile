@@ -12,7 +12,7 @@ pipeline {
           mkdir -p cbci-previews-demo-controller
           git clone https://github.com/cbci-previews-demo/controller.git controller
         '''
-        dir('contorller/bundle') {
+        dir('controller/bundle') {
           sh "cp --parents `find -name \\*.yaml*` ../../cbci-previews-demo-controller/"
         }
         sh '''
