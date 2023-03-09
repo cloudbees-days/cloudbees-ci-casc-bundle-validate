@@ -20,7 +20,7 @@ pipeline {
             ls -la
             curl -i --user "$JENKINS_CLI_USR:$JENKINS_CLI_PSW" -XPOST \
               -H "Accept: application/json"  \
-              -H "Content-type: application/zip" --data-binary "@./controller/bundle/bundle.zip" \
+              -H "Content-type: application/zip;charset=utf-8" --data-binary "@./controller/bundle/bundle.zip" \
               http://cjoc/cjoc/casc-bundle/pre-validate-bundle
           '''
         }
