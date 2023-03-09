@@ -19,6 +19,7 @@ pipeline {
             cd ./unzip
             unzip ../controller/bundle/bundle.zip
             ls -la
+            cd ..
             curl -i --user "$JENKINS_CLI_USR:$JENKINS_CLI_PSW" -XPOST \
               -H "Accept: application/json"  \
               -H "Content-type: application/zip;charset=utf-8" --data-binary "@./controller/bundle/bundle.zip" \
