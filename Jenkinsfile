@@ -8,7 +8,7 @@ pipeline {
     stage('Validate Bundle') {
       steps {
         sh '''
-          git clone https://github.com/cloudbees-days/workshop-casc-bundles.git bundles
+          git clone -b test https://github.com/cloudbees-days/workshop-casc-bundles.git bundles
           cd ./bundles/ops/
           zip -r bundle.zip ./*
         '''
@@ -18,9 +18,8 @@ pipeline {
             mkdir unzip
             cd ./unzip
             unzip ../bundles/ops/bundle.zip
-            cd items
             ls -la
-            cd ../..
+            cd ..
             curl -i --user "$JENKINS_CLI_USR:$JENKINS_CLI_PSW" -XPOST \
               -H "Accept: application/json"  \
               -H "Content-type: application/zip;charset=utf-8" --data-binary "@./bundles/ops/bundle.zip" \
