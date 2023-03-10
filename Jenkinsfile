@@ -17,7 +17,7 @@ pipeline {
             pwd
             mkdir unzip
             cd ./unzip
-            unzip ../bundles/bundle.zip
+            unzip ../bundles/bundles.zip
             ls -la
             cd ops
             ls -la
