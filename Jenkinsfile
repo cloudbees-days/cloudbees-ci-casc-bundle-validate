@@ -17,7 +17,7 @@ pipeline {
             pwd
             mkdir unzip
             cd ./unzip
-            unzip ../bundle.zip
+            unzip ../controller/bundle.zip
             ls -la
             cd bundle
             ls -la
@@ -26,7 +26,7 @@ pipeline {
             cd ../../..
             curl -i --user "$JENKINS_CLI_USR:$JENKINS_CLI_PSW" -XPOST \
               -H "Accept: application/json"  \
-              -H "Content-type: application/zip;charset=utf-8" --data-binary "@./bundle.zip" \
+              -H "Content-type: application/zip;charset=utf-8" --data-binary "@./controller/bundle.zip" \
               http://cjoc/cjoc/casc-bundle/pre-validate-bundle
           '''
         }
