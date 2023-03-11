@@ -8,25 +8,25 @@ pipeline {
     stage('Validate Bundle') {
       steps {
         sh '''
-          git clone https://github.com/cloudbees-days/workshop-casc-bundles.git bundles
-          cd ./bundles
-          zip -r bundles.zip ./*
+          git clone https://github.com/cbci-pipeline/controller.git controller
+          cd controller
+          zip -r bundle.zip bundle
         '''
         withCredentials([usernamePassword(credentialsId: 'admin-cli-token', usernameVariable: 'JENKINS_CLI_USR', passwordVariable: 'JENKINS_CLI_PSW')]) {
           sh  '''
             pwd
             mkdir unzip
             cd ./unzip
-            unzip ../bundles/bundles.zip
+            unzip ../controller/bundle.zip
             ls -la
-            cd ops
+            cd bundle
             ls -la
             cd items
             ls -la
             cd ../../..
             curl -i --user "$JENKINS_CLI_USR:$JENKINS_CLI_PSW" -XPOST \
               -H "Accept: application/json"  \
-              -H "Content-type: application/zip;charset=utf-8" --data-binary "@./bundles/bundles.zip" \
+              -H "Content-type: application/zip;charset=utf-8" --data-binary "@./controller/bundle.zip" \
               http://cjoc/cjoc/casc-bundle/pre-validate-bundle
           '''
         }
