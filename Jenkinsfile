@@ -9,7 +9,7 @@ pipeline {
       steps {
         sh '''
           git clone https://github.com/cbci-pipeline/controller.git controller
-          zip -r bundle.zip controller -x controller/.git\\*
+          zip -r bundle.zip controller -x controller/.git\\* controller/controller.yaml
         '''
         withCredentials([usernamePassword(credentialsId: 'admin-cli-token', usernameVariable: 'JENKINS_CLI_USR', passwordVariable: 'JENKINS_CLI_PSW')]) {
           sh  '''
@@ -22,7 +22,7 @@ pipeline {
             ls -la
             cd items
             ls -la
-            cd ../../..
+            cd ../../../..
             curl -i --user "$JENKINS_CLI_USR:$JENKINS_CLI_PSW" -XPOST \
               -H "Accept: application/json"  \
               -H "Content-type: application/zip;charset=utf-8" --data-binary "@./bundle.zip" \
