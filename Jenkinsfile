@@ -9,15 +9,15 @@ pipeline {
       steps {
         sh '''
           git clone https://github.com/cbci-pipeline/controller.git controller
-          cd controller
-          zip -r bundle.zip bundle
+          //cd controller
+          zip -r bundle.zip controller
         '''
         withCredentials([usernamePassword(credentialsId: 'admin-cli-token', usernameVariable: 'JENKINS_CLI_USR', passwordVariable: 'JENKINS_CLI_PSW')]) {
           sh  '''
             pwd
             mkdir unzip
             cd ./unzip
-            unzip ../controller/bundle.zip
+            unzip ../bundle.zip
             ls -la
             cd bundle
             ls -la
