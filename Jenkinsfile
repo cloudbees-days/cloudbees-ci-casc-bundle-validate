@@ -15,7 +15,7 @@ pipeline {
           cd ../../bundles/
           zip -r bundle.zip .
           cd ../controller/bundle/items
-          yq v pipelines.yaml
+          yq 'true' pipelines.yaml > /dev/null
         '''
         withCredentials([usernamePassword(credentialsId: 'admin-cli-token', usernameVariable: 'JENKINS_CLI_USR', passwordVariable: 'JENKINS_CLI_PSW')]) {
           sh  '''
