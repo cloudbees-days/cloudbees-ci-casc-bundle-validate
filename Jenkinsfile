@@ -10,7 +10,11 @@ pipeline {
         sh '''
           git clone https://github.com/cbci-pipeline/controller.git controller
           cd controller
-          zip -r bundle.zip . -x .git\\* controller.yaml
+          mkdir -p cbci-pipeline-controller
+          cd bundle
+          cp --parents `find -name \\*.yaml*` ../cbci-pipeline-controller/
+          cd ..
+          zip -r bundle.zip . -x .git\\* controller.yaml bundle\\*
         '''
         withCredentials([usernamePassword(credentialsId: 'admin-cli-token', usernameVariable: 'JENKINS_CLI_USR', passwordVariable: 'JENKINS_CLI_PSW')]) {
           sh  '''
@@ -19,7 +23,7 @@ pipeline {
             cd ./unzip
             unzip ../controller/bundle.zip
             ls -la
-            cd bundle
+            cd cbci-pipeline-controller
             ls -la
             cd items
             ls -la
