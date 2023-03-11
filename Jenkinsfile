@@ -9,7 +9,7 @@ pipeline {
       steps {
         sh '''
           git clone https://github.com/cbci-pipeline/controller.git controller
-          zip -r bundle.zip controller
+          zip -r bundle.zip controller -x controller/.git/**\*
         '''
         withCredentials([usernamePassword(credentialsId: 'admin-cli-token', usernameVariable: 'JENKINS_CLI_USR', passwordVariable: 'JENKINS_CLI_PSW')]) {
           sh  '''
@@ -18,14 +18,14 @@ pipeline {
             cd ./unzip
             unzip ../bundle.zip
             ls -la
-            cd bundle
+            cd controller/bundle
             ls -la
             cd items
             ls -la
             cd ../../..
             curl -i --user "$JENKINS_CLI_USR:$JENKINS_CLI_PSW" -XPOST \
               -H "Accept: application/json"  \
-              -H "Content-type: application/zip;charset=utf-8" --data-binary "@./controller/bundle.zip" \
+              -H "Content-type: application/zip;charset=utf-8" --data-binary "@./bundle.zip" \
               http://cjoc/cjoc/casc-bundle/pre-validate-bundle
           '''
         }
