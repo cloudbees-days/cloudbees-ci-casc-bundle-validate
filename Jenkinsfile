@@ -14,7 +14,7 @@ pipeline {
           cp --parents `find -name \\*.yaml*` ../../bundles/cbci-pipeline-controller/
           cd ../../bundles/
           zip -r bundle.zip .
-          cd controller/bundle/items
+          cd ../controller/bundle/items
           yq v pipelines.yaml
         '''
         withCredentials([usernamePassword(credentialsId: 'admin-cli-token', usernameVariable: 'JENKINS_CLI_USR', passwordVariable: 'JENKINS_CLI_PSW')]) {
