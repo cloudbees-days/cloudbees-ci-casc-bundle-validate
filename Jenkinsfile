@@ -9,7 +9,7 @@ pipeline {
       steps {
         sh '''
           git clone https://github.com/cbci-pipeline/controller.git controller
-          zip -r bundle.zip controller -x controller/.git\*
+          zip -r bundle.zip controller -x controller/.git\\\*
         '''
         withCredentials([usernamePassword(credentialsId: 'admin-cli-token', usernameVariable: 'JENKINS_CLI_USR', passwordVariable: 'JENKINS_CLI_PSW')]) {
           sh  '''
